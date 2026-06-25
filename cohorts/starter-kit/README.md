@@ -1,223 +1,248 @@
-# DEP Data Engineering Starter Kit
+# Bata, Bata, Saan Ka Nagmula?
+# *From Birthplace to Opportunity: Building Provincial Opportunity Index for the Philippines*
 
-Welcome to the **Data Engineering Pilipinas Open Track**. This folder is your project scaffold — everything you need to build one real, deployable data project over 24 weeks.
 
----
+## Problem Statement
 
-## Your Journey at a Glance
 
-```mermaid
-flowchart TD
-    A([🚀 Join the Program]) --> B[Copy the Starter Kit\nto your own public GitHub repo]
-    B --> C[Set up your Python environment\nand clone the repo locally]
-    C --> D[Follow the weekly curriculum\nin the phase folders]
+I want to answer:
 
-    D --> E{End of phase?\nMilestone due?}
-    E -- No --> D
-    E -- Yes --> F[Push your work\nand copy your commit hash]
 
-    F --> G[Open a Milestone Issue\non the curriculum repo]
-    G --> H{Auto-Check runs\nautomatically}
+> **"To what extent does being born in a specific province in the Philippines influence access to education, economic mobility, and development opportunities?"**
 
-    H -- ❌ Checks failed --> I[Fix the flagged issues\nand push a new commit]
-    I --> J[Post the new commit hash\nas a comment on the same issue]
-    J --> H
 
-    H -- ✅ All checks passed --> K[Milestone Reviewer\nevaluates your work]
+More specifically, this project aims to:
 
-    K -- needs-improvement --> L[Read the reviewer's comment\nfix your work and push]
-    L --> J
 
-    K -- passed --> M{Is this M6?}
-    M -- No --> D
-    M -- Yes --> N([🎉 Deploy your dashboard\nand present your project])
-```
+> **"Construct a Provincial Opportunity Index that quantifies and compares opportunity levels across Philippine provinces using measurable indicators of education, economic conditions, infrastructure, healthcare access, and digital connectivity."**
+
+
+The Philippines exhibits persistent regional inequality, where provinces differ significantly in income levels, infrastructure availability, and access to public services. While poverty statistics are widely used, they do not fully capture the broader concept of “opportunity” — defined here as the structural conditions that enable upward mobility.
+
+
+This project addresses that gap by building a composite, data-driven index to measure and compare opportunity across provinces using publicly available datasets.
+
 
 ---
 
-## Before You Start
 
-You need:
-- A free [GitHub account](https://github.com)
-- [Python 3.10+](https://www.python.org/downloads/) installed on your machine
-- [Git](https://git-scm.com/) installed and configured
+## Audience
 
----
 
-## Step 1 — Copy This Starter Kit to Your GitHub
+This project is intended for:
 
-You have two options:
 
-**Option A — Use This Repo as a Template (recommended)**
+### Primary Audience
+- Policy makers and government planning agencies (e.g., NEDA, PSA, DILG)
+- Development organizations and NGOs working on poverty reduction and regional development
+- Academic researchers in economics, statistics, and public policy
 
-1. Go to the top of this GitHub repo and click **Use this template → Create a new repository**
-2. Name it something like `dep-data-engineering-<your-name>`
-3. Set it to **Public** (required for milestone submission)
-4. Click **Create repository**
 
-**Option B — Fork and Copy Manually**
+### Secondary Audience
+- Private sector organizations conducting regional expansion (banks, telcos, retail, logistics)
+- Data analysts and data engineers interested in geospatial and socioeconomic analytics
+- Students and professionals exploring data-driven policy modeling
 
-1. Fork this repo to your account
-2. In your fork, delete everything outside of `cohorts/starter-kit/` and restructure the contents as your root
 
-> Your repo must be **public** at all times so reviewers and the auto-checker can access it. Do not make it private at any point during the program — even temporarily. If your repo is private when you submit, the auto-check will fail and your submission will not be reviewed.
+The goal is to provide a structured, evidence-based view of regional opportunity disparities in the Philippines that can support decision-making at both public and private levels.
+
 
 ---
 
-## Step 2 — Clone Your Repo Locally
 
-```bash
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
-```
+## KPI or Key Metric
 
----
 
-## Step 3 — Understand the Folder Structure
+### Main Metric: Provincial Opportunity Index (POI)
 
-```
-your-repo/
-├── data/
-│   ├── raw/            ← Phase 2: raw data files go here
-│   └── processed/      ← Phase 3: cleaned/transformed data goes here
-├── scripts/
-│   ├── ingest.py       ← Phase 2: your data ingestion script
-│   └── transform.py    ← Phase 3: your data transformation script
-├── notebooks/          ← Phase 4 & 5: your analysis notebooks
-├── output/
-│   └── figures/        ← Phase 4: saved charts and visuals
-├── dashboard/
-│   └── index.html      ← Phase 6: your deployed dashboard or report
-├── requirements.txt    ← list all your Python dependencies here
-└── README.md           ← this file — update it as your project grows
-```
 
-You will fill in each folder phase by phase. Do not try to fill everything at once.
+The **Provincial Opportunity Index (POI)** is a composite score (0–100) representing the relative level of opportunity available within each province.
 
----
 
-## Step 4 — Set Up Your Python Environment
+It is constructed from normalized indicators across five domains:
 
-```bash
-python -m venv venv
-source venv/bin/activate        # Mac/Linux
-venv\Scripts\activate           # Windows
 
-pip install -r requirements.txt
-```
+### 1. Economic Conditions
+- Poverty incidence
+- Average household income (or proxy indicators where limited)
+- Employment rate
 
-Add any new packages you install to `requirements.txt`:
 
-```bash
-pip freeze > requirements.txt
-```
+### 2. Educational Access
+- Number of schools per capita
+- Student-to-school ratio (where available)
+- Literacy-related proxies (if available)
 
----
 
-## Step 5 — Work Through the Phases
+### 3. Healthcare Access
+- Number of health facilities per capita
+- Accessibility of hospitals/health centers
 
-| Phase | Weeks | What you build |
-|-------|-------|----------------|
-| 1 — Foundations | 1–4 | Define your problem, find your data source, set up this repo |
-| 2 — Data Collection | 5–6 | Write `scripts/ingest.py`, pull raw data into `data/raw/` |
-| 3 — Data Processing | 7–12 | Write `scripts/transform.py`, clean and model data in `data/processed/` |
-| 4 — Analysis & Insights | 13–16 | Explore data in `notebooks/`, produce charts in `output/figures/` |
-| 5 — Predictive / Alt Track | 17–20 | Build a model (Path A) or advanced analysis (Path B) |
-| 6 — Deployment | 21–24 | Deploy `dashboard/index.html` via GitHub Pages, prepare your demo |
+
+### 4. Infrastructure & Accessibility
+- Road density (OpenStreetMap-derived)
+- Distance to regional economic centers
+- Urbanization level (proxy indicators)
+
+
+### 5. Digital Connectivity (Proxy-Based)
+- Population density as proxy for digital infrastructure access
+- Available ICT penetration indicators (where accessible from public reports)
+
+
+### Composite Construction Approach
+- Min-max normalization of each indicator
+- Weighted aggregation (initially equal weighting, subject to sensitivity testing)
+- Optional PCA-based weighting for robustness comparison
+
 
 ---
 
-## Step 6 — Submit at Each Milestone
 
-At the end of each phase, submit a milestone issue on the **curriculum repo**:
+## Likely Data Sources
 
-1. Go to [github.com/dataengineeringpilipinas/dep-data-engineering-open-track/issues/new/choose](https://github.com/dataengineeringpilipinas/dep-data-engineering-open-track/issues/new/choose)
-2. Select the template matching your milestone (e.g. **Milestone 1 — Foundations Complete**)
-3. Fill in your name, cohort, repo URL, and **commit hash**
 
-**How to get your commit hash:**
+This project relies on **public, semi-structured, and scrapeable datasets**, combined into a unified data warehouse.
 
-```bash
-git log --oneline -1
-# Example output: a1b2c3d feat: add ingestion script
-# Your commit hash is: a1b2c3d (or the full 40-character version)
-```
 
-Copy the full hash:
+### 1. Philippine Statistics Authority (PSA)
 
-```bash
-git log -1 --format="%H"
-```
 
-After you submit, the auto-checker will run and post a comment on your issue within a few minutes. Fix anything flagged before waiting for a reviewer.
+Provides:
+- Poverty incidence by province
+- Population and demographic data
+- Income and employment statistics (aggregated surveys)
 
-**What happens next:**
 
-| Step | Who | What |
-|------|-----|------|
-| Auto-Check | Bot | Clones your repo at the commit hash and checks for required files. Posts ✅/❌ per item. |
-| Fix & Resubmit | You | If any check fails, fix the issue, push a new commit, and post the new commit hash as a comment on the same issue. The auto-check re-runs automatically. |
-| Review | Volunteer | Once all checks pass, a Milestone Reviewer reads your work and applies one of two labels. |
-| `passed` | Reviewer | You're clear to move to the next phase. |
-| `needs-improvement` | Reviewer | The reviewer leaves one specific comment. Fix it, push a new commit, and post the new commit hash as a comment on the same issue. |
+**Usage in pipeline:**
+- Core socioeconomic indicators
+- Primary ground truth for inequality analysis
 
-> Reviewers aim to respond within **5 days**. If you haven't heard back in 7 days, post in the Discord community channel and tag your moderator.
-
-**How to resubmit after a `needs-improvement` verdict:**
-
-```bash
-# Fix your work, then:
-git add .
-git commit -m "fix: address reviewer feedback"
-git push
-
-# Get your new commit hash:
-git log -1 --format="%H"
-
-# Paste the hash as a comment on your existing milestone issue — do NOT open a new issue.
-```
 
 ---
 
-## Step 7 — Enable GitHub Pages (Phase 6)
 
-To deploy your dashboard:
+### 2. Department of Education (DepEd)
 
-1. In your repo, go to **Settings → Pages**
-2. Under **Source**, select **Deploy from a branch**
-3. Choose `main` branch and `/dashboard` folder
-4. Click **Save** — your live URL will appear as `https://<your-username>.github.io/<your-repo-name>/`
 
----
+Provides:
+- School directory (institution-level data)
+- Enrollment statistics (limited aggregation)
 
-## Updating Your README
 
-Replace this file with your own project README as you progress. At minimum, your README should include:
+**Usage in pipeline:**
+- Aggregation of schools per province
+- Education access proxy metrics
 
-- What problem you are solving
-- Where your data comes from
-- How to run your scripts (`ingest.py`, `transform.py`)
-- Your key findings (Phase 4+)
-- Your live dashboard URL (Phase 6)
 
 ---
 
-## Getting Help
 
-- Check the weekly READMEs in the curriculum repo for topic guides and resources
-- Post in the community Discord if you are stuck after 2 hours on a problem
-- Review `docs/FAQ.md` in the curriculum repo for common questions
+### 3. Department of Health (DOH)
+
+
+Provides:
+- Health facility registry
+- Location of hospitals, rural health units, clinics
+
+
+**Usage in pipeline:**
+- Healthcare access indicators per province
+
 
 ---
 
-## Milestone Quick Reference
 
-| Milestone | When | What reviewers check |
-|-----------|------|---------------------|
-| M0 | Week 1 | Repo is public, README describes your project |
-| M1 | Week 3–4 | Folder structure exists, requirements.txt present |
-| M2 | Week 6 | `ingest.py` runs, `data/raw/` has real data |
-| M3 | Week 12 | `transform.py` runs, `data/processed/` has output |
-| M4 | Week 16 | Notebook exists and runs end-to-end |
-| M5 | Week 20 | Pipeline is connected, path-specific outputs saved |
-| M6 | Week 24 | Dashboard is live at a public URL |
+### 4. OpenStreetMap (OSM)
+
+
+Provides:
+- Road networks
+- Infrastructure data
+- Geographic features
+
+
+**Usage in pipeline:**
+- Road density computation
+- Accessibility and spatial connectivity metrics
+
+
+---
+
+
+### 5. Philippine Administrative Boundaries (GIS Data)
+
+
+Sources may include:
+- PSA shapefiles
+- GADM dataset
+- NAMRIA datasets (if accessible)
+
+
+**Usage in pipeline:**
+- Spatial joins
+- Province-level aggregation
+- Choropleth visualization
+
+
+---
+
+
+### 6. Optional / Exploratory Sources
+
+
+- DICT reports (digital infrastructure proxies)
+- BSP reports (financial access indicators)
+- World Bank regional datasets (contextual benchmarking)
+
+
+---
+
+
+## Possible Final Dashboard
+
+
+The dashboard will help users quickly understand:
+
+
+> **Which Philippine provinces offer the highest and lowest levels of opportunity, and what structural factors explain these differences.**
+
+
+### Page 1: National Opportunity Map
+- Choropleth map of the Philippines by province
+- Opportunity Index ranking
+- Top and bottom provinces highlighted
+
+
+### Page 2: Opportunity Drivers
+- Breakdown of POI by domain:
+ - Education
+ - Economy
+ - Infrastructure
+ - Health
+ - Connectivity
+- Feature contribution visualization
+
+
+### Page 3: Provincial Comparison Tool
+- Side-by-side comparison of two provinces
+- Radar/spider chart of indicators
+- Rank differences per domain
+
+
+### Page 4: Inequality Insights
+- Distribution of opportunity scores
+- Identification of “high poverty, high opportunity” vs “low opportunity traps”
+- Regional clustering of opportunity levels
+
+
+---
+
+
+## Final Note
+
+
+This project does not claim that birthplace fully determines life outcomes. Instead, it measures how structural conditions vary across provinces and how those conditions may influence access to opportunity.
+
+
+The goal is not to predict destiny, but to quantify disparity.
