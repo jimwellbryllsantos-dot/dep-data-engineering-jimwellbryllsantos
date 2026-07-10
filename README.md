@@ -1,115 +1,248 @@
-# DEP Data Engineering Open Track: A 6-Month Project-Driven Build Journey
+# Bata, Bata, Saan Ka Nagmula?
+# *From Birthplace to Opportunity: Building Provincial Opportunity Index for the Philippines*
 
-> A 6-month, self-paced, project-driven learning journey. Participants build a real, deployable data project using free and open-source tools.
 
-**Cohort:** June – November 2026 &nbsp;|&nbsp; **Time:** ~5 hrs/week &nbsp;|&nbsp; **Cost:** Free
+## Problem Statement
 
----
 
-## What You'll Build
+I want to answer:
 
-By the end of the program, every participant will have:
 
-- A **public GitHub repo** with a clean, documented data project
-- An **end-to-end data pipeline** (ingest → clean → analyze → deploy)
-- An **analysis notebook** with charts, statistics, and written insights
-- A **live deployed dashboard** (GitHub Pages)
+> **"To what extent does being born in a specific province in the Philippines influence access to education, economic mobility, and development opportunities?"**
 
----
 
-## Program Design
+More specifically, this project aims to:
 
-| | |
-|-|-|
-| **Duration** | 24 weeks (~5 hours/week, ~120 hours total) |
-| **Weekly Rule** | 1 primary resource + 1 optional max; every week produces a project artifact |
-| **Design Principles** | Project-first · milestone-driven · public accountability · low-overwhelm resource curation |
-| **Resource Rule** | Prefer official docs, interactive tools, or one proven course. Avoid multiple full courses in the same week. |
-| **Tool Stack** | Free tools only: GitHub, Python, SQL, HTML. Optional tools (Tableau, etc.) are learner-driven. |
+
+> **"Construct a Provincial Opportunity Index that quantifies and compares opportunity levels across Philippine provinces using measurable indicators of education, economic conditions, infrastructure, healthcare access, and digital connectivity."**
+
+
+The Philippines exhibits persistent regional inequality, where provinces differ significantly in income levels, infrastructure availability, and access to public services. While poverty statistics are widely used, they do not fully capture the broader concept of “opportunity” — defined here as the structural conditions that enable upward mobility.
+
+
+This project addresses that gap by building a composite, data-driven index to measure and compare opportunity across provinces using publicly available datasets.
+
 
 ---
 
-## How to Use This Repo
 
-This is the **program hub** — it contains the curriculum, weekly resources, and milestone guides.
+## Audience
 
-**Builders:** Follow the phase folders in order. Each week folder has resources, tasks, and links.
 
-**Volunteers:** See [docs/VOLUNTEER_GUIDE.md](docs/VOLUNTEER_GUIDE.md) for your role and responsibilities.
+This project is intended for:
 
----
 
-## Stuck Protocol
+### Primary Audience
+- Policy makers and government planning agencies (e.g., NEDA, PSA, DILG)
+- Development organizations and NGOs working on poverty reduction and regional development
+- Academic researchers in economics, statistics, and public policy
 
-> If you have spent more than **2 hours** on one problem without progress:
->
-> 1. Write down exactly what you tried
-> 2. Post in the DEP community channel with your error message and code snippet
-> 3. Tag your moderator
->
-> **Do NOT skip ahead.** Moderators flag stuck participants for Ops Lead review within 48 hours.
-> You may not advance to the next milestone while a blocker is unresolved.
 
----
+### Secondary Audience
+- Private sector organizations conducting regional expansion (banks, telcos, retail, logistics)
+- Data analysts and data engineers interested in geospatial and socioeconomic analytics
+- Students and professionals exploring data-driven policy modeling
 
-## Curriculum
 
-| Phase | Weeks | Focus | Output |
-|-------|-------|-------|--------|
-| [01 — Foundations](01-foundations/) | 1–4 | Problem framing, data source discovery, GitHub + Python basics | Problem statement + first raw data pull |
-| [02 — Data Collection](02-data-collection/) | 5–6 | API fundamentals, alternate ingestion paths (scraping / manual) | Ingestion script + raw data in `/data/raw` |
-| [03 — Data Processing](03-data-processing/) | 7–12 | Storage/data modeling, SQL, Pandas cleaning, data quality, pipeline structuring | Clean, schema-defined dataset + reproducible pipeline |
-| [04 — Analysis & Insights](04-analysis-and-insights/) | 13–16 | Descriptive stats, EDA, visualization, insight writing | Insights notebook with 3–5 charts |
-| [05A — Predictive Layer](05-project-packaging/) *(Path A — conditional)* | 17–20 | Regression, classification, feature engineering, ML pipeline integration | Predictive model + evaluation metrics |
-| [05B — Non-Predictive Alt Track](05-project-packaging/) *(Path B — conditional)* | 17–20 | Advanced segmentation, KPI framework, stakeholder narrative, repo integration | Advanced analysis + stakeholder brief |
-| [06 — Deployment](06-deployment/) | 21–24 | Dashboard design + build, GitHub Pages deploy, documentation polish, presentation | Live project URL + portfolio-ready repo |
+The goal is to provide a structured, evidence-based view of regional opportunity disparities in the Philippines that can support decision-making at both public and private levels.
+
 
 ---
 
-## Milestones
 
-Progress is tracked through 7 milestones (M0–M6). Each one has a clear output and a submission form.
+## KPI or Key Metric
 
-| Milestone | When | Output |
-|-----------|------|--------|
-| M0 — Problem Statement | End of Week 1 | Specific question + audience + possible data source + README in learner's own words |
-| M1 — Data Source Identified / Repo Initialized | By Week 3–4 | Working repo + chosen source + README data section complete |
-| M2 — Data Ingestion Script | By Week 6 | Raw data in `/data/raw` via API, scraping, or manual timestamped save |
-| M3 — Clean Dataset | By Week 12 | Processed dataset + schema plan + cleaning notes + validation checks |
-| M4 — Initial Insights | By Week 16 | 3–5 charts + written interpretations + one cautious inference section |
-| M5 — Public Repo / Predictive Component | By Week 20–23 | Professional repo + predictive layer (Path A) OR advanced EDA + stakeholder brief (Path B) |
-| M6 — Live Deployment | By Week 24 | Live GitHub Pages URL + presentable final project |
 
-> **Gates:** M0 and M1 are hard gates. Learners must not proceed to the next phase without moderator review and approval.
+### Main Metric: Provincial Opportunity Index (POI)
 
-Full checklist: [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md)
+
+The **Provincial Opportunity Index (POI)** is a composite score (0–100) representing the relative level of opportunity available within each province.
+
+
+It is constructed from normalized indicators across five domains:
+
+
+### 1. Economic Conditions
+- Poverty incidence
+- Average household income (or proxy indicators where limited)
+- Employment rate
+
+
+### 2. Educational Access
+- Number of schools per capita
+- Student-to-school ratio (where available)
+- Literacy-related proxies (if available)
+
+
+### 3. Healthcare Access
+- Number of health facilities per capita
+- Accessibility of hospitals/health centers
+
+
+### 4. Infrastructure & Accessibility
+- Road density (OpenStreetMap-derived)
+- Distance to regional economic centers
+- Urbanization level (proxy indicators)
+
+
+### 5. Digital Connectivity (Proxy-Based)
+- Population density as proxy for digital infrastructure access
+- Available ICT penetration indicators (where accessible from public reports)
+
+
+### Composite Construction Approach
+- Min-max normalization of each indicator
+- Weighted aggregation (initially equal weighting, subject to sensitivity testing)
+- Optional PCA-based weighting for robustness comparison
+
 
 ---
 
-## Getting Started (Participants)
 
-1. **Join the community** — [Join the DEP Discord](https://discord.com/invite/buDgydz7J9)
-2. **Set up your project repo** — copy the [DEP Starter Kit](cohorts/starter-kit/) scaffold into your own GitHub repo
-3. **Start Phase 1** — go to [01-foundations/](01-foundations/) and begin Week 1
+## Likely Data Sources
 
----
 
-## Tech Stack
+This project relies on **public, semi-structured, and scrapeable datasets**, combined into a unified data warehouse.
 
-![DEP Tech Stack](docs/stack-diagram.svg)
 
----
+### 1. Philippine Statistics Authority (PSA)
 
-## Cohorts
 
-- [2026 Cohort](cohorts/2026/) — June–November 2026 *(current)*
+Provides:
+- Poverty incidence by province
+- Population and demographic data
+- Income and employment statistics (aggregated surveys)
 
----
 
-## For Volunteers
+**Usage in pipeline:**
+- Core socioeconomic indicators
+- Primary ground truth for inequality analysis
 
-See [docs/VOLUNTEER_GUIDE.md](docs/VOLUNTEER_GUIDE.md) for role descriptions, responsibilities, and the operating rhythm.
 
 ---
 
-*Built by Data Engineering Pilipinas. Free and open. Always.*
+
+### 2. Department of Education (DepEd)
+
+
+Provides:
+- School directory (institution-level data)
+- Enrollment statistics (limited aggregation)
+
+
+**Usage in pipeline:**
+- Aggregation of schools per province
+- Education access proxy metrics
+
+
+---
+
+
+### 3. Department of Health (DOH)
+
+
+Provides:
+- Health facility registry
+- Location of hospitals, rural health units, clinics
+
+
+**Usage in pipeline:**
+- Healthcare access indicators per province
+
+
+---
+
+
+### 4. OpenStreetMap (OSM)
+
+
+Provides:
+- Road networks
+- Infrastructure data
+- Geographic features
+
+
+**Usage in pipeline:**
+- Road density computation
+- Accessibility and spatial connectivity metrics
+
+
+---
+
+
+### 5. Philippine Administrative Boundaries (GIS Data)
+
+
+Sources may include:
+- PSA shapefiles
+- GADM dataset
+- NAMRIA datasets (if accessible)
+
+
+**Usage in pipeline:**
+- Spatial joins
+- Province-level aggregation
+- Choropleth visualization
+
+
+---
+
+
+### 6. Optional / Exploratory Sources
+
+
+- DICT reports (digital infrastructure proxies)
+- BSP reports (financial access indicators)
+- World Bank regional datasets (contextual benchmarking)
+
+
+---
+
+
+## Possible Final Dashboard
+
+
+The dashboard will help users quickly understand:
+
+
+> **Which Philippine provinces offer the highest and lowest levels of opportunity, and what structural factors explain these differences.**
+
+
+### Page 1: National Opportunity Map
+- Choropleth map of the Philippines by province
+- Opportunity Index ranking
+- Top and bottom provinces highlighted
+
+
+### Page 2: Opportunity Drivers
+- Breakdown of POI by domain:
+ - Education
+ - Economy
+ - Infrastructure
+ - Health
+ - Connectivity
+- Feature contribution visualization
+
+
+### Page 3: Provincial Comparison Tool
+- Side-by-side comparison of two provinces
+- Radar/spider chart of indicators
+- Rank differences per domain
+
+
+### Page 4: Inequality Insights
+- Distribution of opportunity scores
+- Identification of “high poverty, high opportunity” vs “low opportunity traps”
+- Regional clustering of opportunity levels
+
+
+---
+
+
+## Final Note
+
+
+This project does not claim that birthplace fully determines life outcomes. Instead, it measures how structural conditions vary across provinces and how those conditions may influence access to opportunity.
+
+
+The goal is not to predict destiny, but to quantify disparity.
