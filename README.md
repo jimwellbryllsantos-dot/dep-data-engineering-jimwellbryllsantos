@@ -99,102 +99,201 @@ It is constructed from normalized indicators across five domains:
 ---
 
 
-## Likely Data Sources
+## Data Source Notes
 
-
-This project relies on **public, semi-structured, and scrapeable datasets**, combined into a unified data warehouse.
-
-
-### 1. Philippine Statistics Authority (PSA)
-
-
-Provides:
-- Poverty incidence by province
-- Population and demographic data
-- Income and employment statistics (aggregated surveys)
-
-
-**Usage in pipeline:**
-- Core socioeconomic indicators
-- Primary ground truth for inequality analysis
-
+The Provincial Opportunity Index (POI) is constructed by integrating multiple authoritative government datasets. Each domain of the index is supported by one or more primary data sources. Where official datasets are pending approval or acquisition, fallback sources are identified to ensure project continuity.
 
 ---
 
+## Domain 1 — Economic Conditions
 
-### 2. Department of Education (DepEd)
-
-
-Provides:
-- School directory (institution-level data)
-- Enrollment statistics (limited aggregation)
-
-
-**Usage in pipeline:**
-- Aggregation of schools per province
-- Education access proxy metrics
-
+### Primary Source 1
+- **Status:** ✅ Confirmed
+- **Name:** 2023 Official Poverty Statistics – Poverty Incidence Among Population by Region and Province
+- **Agency:** Philippine Statistics Authority (PSA)
+- **URL:** https://psa.gov.ph/statistics/poverty/stat-tables/released/2023
+- **Format:** XLSX
+- **Coverage:** Provincial-level poverty incidence for 2018, 2021, and 2023
+- **Why it fits the problem:** Measures structural poverty across provinces and serves as one of the primary indicators of opportunity.
+- **Known limitations:** Published periodically rather than annually.
 
 ---
 
-
-### 3. Department of Health (DOH)
-
-
-Provides:
-- Health facility registry
-- Location of hospitals, rural health units, clinics
-
-
-**Usage in pipeline:**
-- Healthcare access indicators per province
-
+### Primary Source 2
+- **Status:** ✅ Confirmed
+- **Name:** Family Income and Expenditure Survey (FIES) – Average Annual Family Income
+- **Agency:** Philippine Statistics Authority (PSA)
+- **URL:** https://psa.gov.ph/statistics/income-expenditure/fies/stat-tables/released/2024
+- **Format:** XLSX
+- **Coverage:** Provincial estimates for 2018, 2021, and 2023
+- **Why it fits the problem:** Measures household economic capacity across provinces.
+- **Known limitations:** Survey-based estimates; updated every three years.
 
 ---
 
-
-### 4. OpenStreetMap (OSM)
-
-
-Provides:
-- Road networks
-- Infrastructure data
-- Geographic features
-
-
-**Usage in pipeline:**
-- Road density computation
-- Accessibility and spatial connectivity metrics
-
+### Primary Source 3
+- **Status:** ✅ Confirmed
+- **Name:** Family Income and Expenditure Survey (FIES) – Average Annual Family Expenditure
+- **Agency:** Philippine Statistics Authority (PSA)
+- **URL:** https://psa.gov.ph/statistics/income-expenditure/fies/stat-tables/released/2024
+- **Format:** XLSX
+- **Coverage:** Provincial estimates for 2018, 2021, and 2023
+- **Why it fits the problem:** Complements income data by capturing household spending patterns.
+- **Known limitations:** Survey-based estimates; updated every three years.
 
 ---
 
+## Domain 2 — Educational Access
 
-### 5. Philippine Administrative Boundaries (GIS Data)
+### Primary Source 4
+- **Status:** 🟡 Pending FOI Request
+- **Name:** Basic Education Information System (BEIS) School-Level Masterlist
+- **Agency:** Department of Education (DepEd)
+- **Format:** CSV / XLSX (Requested)
+- **Coverage:** Latest finalized school year (preferably SY 2025–2026)
+- **Requested Variables:**
+  - School ID
+  - School Name
+  - Region
+  - Province
+  - City/Municipality
+  - Public/Private Classification
+  - School Level
+  - School Status
+  - Total Enrollment
+  - Number of Teaching Personnel
+- **Why it fits the problem:** Enables computation of schools per capita, enrollment per capita, and student-to-teacher ratios.
+- **Known limitations:** Subject to FOI approval.
 
-
-Sources may include:
-- PSA shapefiles
-- GADM dataset
-- NAMRIA datasets (if accessible)
-
-
-**Usage in pipeline:**
-- Spatial joins
-- Province-level aggregation
-- Choropleth visualization
-
+### Fallback Source
+- **Name:** DepEd Regional/Division School Masterlists or BEIS Public Directory
+- **Format:** XLSX / HTML
+- **Coverage:** Regional or division-level school listings
+- **Why it could still work:** School counts can be consolidated into a nationwide dataset if the FOI request is unsuccessful.
+- **Known limitations:** Requires extensive consolidation and standardization.
 
 ---
 
+### Primary Source 5
+- **Status:** 🟡 Pending FOI Request
+- **Name:** Directory of Higher Education Institutions (HEIs)
+- **Agency:** Commission on Higher Education (CHED)
+- **Format:** CSV / XLSX (Requested)
+- **Coverage:** Latest finalized academic year
+- **Requested Variables:**
+  - HEI ID
+  - Institution Name
+  - Province
+  - Region
+  - City/Municipality
+  - Public/Private Classification
+  - Institution Type
+  - Operational Status
+  - Total Enrollment (if available)
+  - Total Faculty (if available)
+- **Why it fits the problem:** Measures accessibility to tertiary education.
+- **Known limitations:** Enrollment and faculty information may not be included in the standard directory.
 
-### 6. Optional / Exploratory Sources
+### Fallback Source
+- **Name:** CHED Public Directory of Higher Education Institutions
+- **URL:** https://ched.gov.ph/list-of-higher-education-institutions/
+- **Format:** HTML
+- **Coverage:** Nationwide
+- **Why it could still work:** Provides an official list of HEIs that can be scraped and aggregated by province.
+- **Known limitations:** May not include enrollment or faculty statistics.
 
+---
 
-- DICT reports (digital infrastructure proxies)
-- BSP reports (financial access indicators)
-- World Bank regional datasets (contextual benchmarking)
+## Domain 3 — Healthcare Access
 
+### Primary Source 6
+- **Status:** ✅ Confirmed
+- **Name:** National Health Facility Registry (NHFR) – Provincial Facility Details
+- **Agency:** Department of Health (DOH)
+- **URL:** https://nhfr.doh.gov.ph/StatHfProvincialList
+- **Format:** CSV / XLSX
+- **Coverage:** Licensed hospitals, rural health units, clinics, and other health facilities nationwide
+- **Why it fits the problem:** Supports calculation of healthcare facility density and accessibility.
+- **Known limitations:** Does not measure service quality or utilization.
+
+---
+
+## Domain 4 — Infrastructure & Accessibility
+
+### Primary Source 7
+- **Status:** 🔵 To Be Sourced
+- **Name:** OpenStreetMap Road Network
+- **Agency:** OpenStreetMap
+- **Format:** PBF / SHP / GeoJSON
+- **Coverage:** Nationwide
+- **Why it fits the problem:** Enables derivation of road density and transportation accessibility indicators.
+- **Known limitations:** Community-maintained dataset with varying completeness across locations.
+
+### Primary Source 8
+- **Status:** 🔵 To Be Sourced
+- **Name:** Philippine Administrative Boundary Shapefiles
+- **Agency:** PSA / NAMRIA
+- **Format:** SHP / GeoJSON
+- **Coverage:** Provincial administrative boundaries
+- **Why it fits the problem:** Required for spatial joins and choropleth mapping.
+- **Known limitations:** Boundary revisions should be documented.
+
+### Fallback Source
+- **Name:** GADM Administrative Areas
+- **URL:** https://gadm.org
+- **Format:** SHP / GeoPackage
+- **Coverage:** Global administrative boundaries
+- **Why it could still work:** Widely used alternative for GIS analyses.
+- **Known limitations:** May lag behind official Philippine administrative updates.
+
+---
+
+## Domain 5 — Digital Connectivity (Optional)
+
+**Status:** ⚪ Planned for Future Enhancement
+
+Digital connectivity indicators are currently under evaluation. Reliable province-level public datasets are being assessed for inclusion in a future iteration of the Provincial Opportunity Index.
+
+Potential sources include:
+- Department of Information and Communications Technology (DICT)
+- National Telecommunications Commission (NTC)
+- PSA ICT-related indicators (where available)
+
+# Supporting Data Sources
+
+These datasets support multiple domains of the Provincial Opportunity Index by providing denominators for per-capita indicators or enabling spatial analysis.
+
+## Supporting Source 1
+
+- **Status:** ✅ Confirmed
+- **Name:** Census of Population and Housing (CPH) / Population Estimates
+- **Agency:** Philippine Statistics Authority (PSA)
+- **URL:** https://psa.gov.ph/statistics/population-and-housing/stat-tables
+- **Format:** XLSX
+- **Coverage:** National, regional, provincial, and Highly Urbanized City population estimates
+- **Why it fits the problem:** Provides population counts used to normalize education, healthcare, and higher education indicators into comparable per-capita measures.
+- **Known limitations:** Official census occurs every five years; projected population estimates may be used for more recent years.
+
+---
+
+## Supporting Source 2
+
+- **Status:** 🔵 To Be Sourced
+- **Name:** Philippine Administrative Boundary Shapefiles
+- **Agency:** PSA / NAMRIA
+- **Format:** SHP / GeoJSON
+- **Coverage:** Provincial administrative boundaries
+- **Why it fits the problem:** Enables province-level aggregation, spatial joins, and choropleth visualizations.
+- **Known limitations:** Administrative boundary revisions should be documented.
+
+### Fallback Source
+
+- **Name:** GADM Administrative Areas
+- **URL:** https://gadm.org
+- **Format:** SHP / GeoPackage
+- **Coverage:** Global administrative boundaries
+- **Why it could still work:** Widely used alternative for GIS analyses when official boundary files are unavailable.
+- **Known limitations:** May lag behind official Philippine administrative updates.
 
 ---
 
