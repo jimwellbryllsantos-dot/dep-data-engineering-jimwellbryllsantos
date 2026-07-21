@@ -113,6 +113,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Agency:** Philippine Statistics Authority (PSA)
 - **URL:** https://psa.gov.ph/statistics/poverty/stat-tables/released/2023
 - **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Provincial-level poverty incidence for 2018, 2021, and 2023
 - **Why it fits the problem:** Measures structural poverty across provinces and serves as one of the primary indicators of opportunity.
 - **Known limitations:** Published periodically rather than annually.
@@ -125,6 +126,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Agency:** Philippine Statistics Authority (PSA)
 - **URL:** https://psa.gov.ph/statistics/income-expenditure/fies/stat-tables/released/2024
 - **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Provincial estimates for 2018, 2021, and 2023
 - **Why it fits the problem:** Measures household economic capacity across provinces.
 - **Known limitations:** Survey-based estimates; updated every three years.
@@ -137,6 +139,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Agency:** Philippine Statistics Authority (PSA)
 - **URL:** https://psa.gov.ph/statistics/income-expenditure/fies/stat-tables/released/2024
 - **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Provincial estimates for 2018, 2021, and 2023
 - **Why it fits the problem:** Complements income data by capturing household spending patterns.
 - **Known limitations:** Survey-based estimates; updated every three years.
@@ -150,6 +153,8 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Name:** Basic Education Information System (BEIS) School-Level Masterlist
 - **Agency:** Department of Education (DepEd)
 - **Format:** CSV / XLSX (Requested)
+- **Planned Ingestion Method:** API / Web Scraping / Manual File Download
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Latest finalized school year (preferably SY 2025–2026)
 - **Requested Variables:**
   - School ID
@@ -168,6 +173,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 ### Fallback Source
 - **Name:** DepEd Regional/Division School Masterlists or BEIS Public Directory
 - **Format:** XLSX / HTML
+- **Planned Ingestion Method:** Web Scraping
 - **Coverage:** Regional or division-level school listings
 - **Why it could still work:** School counts can be consolidated into a nationwide dataset if the FOI request is unsuccessful.
 - **Known limitations:** Requires extensive consolidation and standardization.
@@ -179,6 +185,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Name:** Directory of Higher Education Institutions (HEIs)
 - **Agency:** Commission on Higher Education (CHED)
 - **Format:** CSV / XLSX (Requested)
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Latest finalized academic year
 - **Requested Variables:**
   - HEI ID
@@ -198,6 +205,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Name:** CHED Public Directory of Higher Education Institutions
 - **URL:** https://ched.gov.ph/list-of-higher-education-institutions/
 - **Format:** HTML
+- **Planned Ingestion Method:** Web Scraping
 - **Coverage:** Nationwide
 - **Why it could still work:** Provides an official list of HEIs that can be scraped and aggregated by province.
 - **Known limitations:** May not include enrollment or faculty statistics.
@@ -212,6 +220,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Agency:** Department of Health (DOH)
 - **URL:** https://nhfr.doh.gov.ph/StatHfProvincialList
 - **Format:** CSV / XLSX
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Licensed hospitals, rural health units, clinics, and other health facilities nationwide
 - **Why it fits the problem:** Supports calculation of healthcare facility density and accessibility.
 - **Known limitations:** Does not measure service quality or utilization.
@@ -225,26 +234,10 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Name:** OpenStreetMap Road Network
 - **Agency:** OpenStreetMap
 - **Format:** PBF / SHP / GeoJSON
+- **Planned Ingestion Method:** API call (Overpass API)
 - **Coverage:** Nationwide
 - **Why it fits the problem:** Enables derivation of road density and transportation accessibility indicators.
 - **Known limitations:** Community-maintained dataset with varying completeness across locations.
-
-### Primary Source 8
-- **Status:** 🔵 To Be Sourced
-- **Name:** Philippine Administrative Boundary Shapefiles
-- **Agency:** PSA / NAMRIA
-- **Format:** SHP / GeoJSON
-- **Coverage:** Provincial administrative boundaries
-- **Why it fits the problem:** Required for spatial joins and choropleth mapping.
-- **Known limitations:** Boundary revisions should be documented.
-
-### Fallback Source
-- **Name:** GADM Administrative Areas
-- **URL:** https://gadm.org
-- **Format:** SHP / GeoPackage
-- **Coverage:** Global administrative boundaries
-- **Why it could still work:** Widely used alternative for GIS analyses.
-- **Known limitations:** May lag behind official Philippine administrative updates.
 
 ---
 
@@ -270,6 +263,7 @@ These datasets support multiple domains of the Provincial Opportunity Index by p
 - **Agency:** Philippine Statistics Authority (PSA)
 - **URL:** https://psa.gov.ph/statistics/population-and-housing/stat-tables
 - **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** National, regional, provincial, and Highly Urbanized City population estimates
 - **Why it fits the problem:** Provides population counts used to normalize education, healthcare, and higher education indicators into comparable per-capita measures.
 - **Known limitations:** Official census occurs every five years; projected population estimates may be used for more recent years.
@@ -282,6 +276,7 @@ These datasets support multiple domains of the Provincial Opportunity Index by p
 - **Name:** Philippine Administrative Boundary Shapefiles
 - **Agency:** PSA / NAMRIA
 - **Format:** SHP / GeoJSON
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Provincial administrative boundaries
 - **Why it fits the problem:** Enables province-level aggregation, spatial joins, and choropleth visualizations.
 - **Known limitations:** Administrative boundary revisions should be documented.
@@ -291,6 +286,7 @@ These datasets support multiple domains of the Provincial Opportunity Index by p
 - **Name:** GADM Administrative Areas
 - **URL:** https://gadm.org
 - **Format:** SHP / GeoPackage
+- **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Global administrative boundaries
 - **Why it could still work:** Widely used alternative for GIS analyses when official boundary files are unavailable.
 - **Known limitations:** May lag behind official Philippine administrative updates.
