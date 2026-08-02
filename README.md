@@ -149,38 +149,32 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 ## Domain 2 — Educational Access
 
 ### Primary Source 4
-- **Status:** 🟡 Pending FOI Request
-- **Name:** Basic Education Information System (BEIS) School-Level Masterlist
-- **Agency:** Department of Education (DepEd)
-- **Format:** CSV / XLSX (Requested)
-- **Planned Ingestion Method:** API / Web Scraping / Manual File Download
-- **Planned Ingestion Method:** Manual File Download
-- **Coverage:** Latest finalized school year (preferably SY 2025–2026)
-- **Requested Variables:**
-  - School ID
-  - School Name
-  - Region
-  - Province
-  - City/Municipality
-  - Public/Private Classification
-  - School Level
-  - School Status
-  - Total Enrollment
-  - Number of Teaching Personnel
-- **Why it fits the problem:** Enables computation of schools per capita, enrollment per capita, and student-to-teacher ratios.
-- **Known limitations:** Subject to FOI approval.
 
-### Fallback Source
-- **Name:** DepEd Regional/Division School Masterlists or BEIS Public Directory
-- **Format:** XLSX / HTML
-- **Planned Ingestion Method:** Web Scraping
-- **Coverage:** Regional or division-level school listings
-- **Why it could still work:** School counts can be consolidated into a nationwide dataset if the FOI request is unsuccessful.
-- **Known limitations:** Requires extensive consolidation and standardization.
+- **Status:** 🟢 Available
+- **Name:** _SY 2025-2026 SCHOOL LEVEL DATA ON ENROLLMENT (BY_SCHOOL_FR)_1
+- **Agency:** Department of Education (DepEd)
+- **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download (official dataset provided by DepEd through FOI request)
+- **Coverage:** School Year 2025–2026 (Latest update: January 17, 2026)
+- **Why it fits the problem:** Provides school-level enrollment data that can be aggregated to the provincial level to derive education access indicators such as schools per capita, enrollment per capita, and public-private school distribution.
+- **Known limitations:** Enrollment information is maintained separately from personnel records and therefore requires integration with the personnel dataset.
 
 ---
 
 ### Primary Source 5
+
+- **Status:** 🟢 Available
+- **Name:** SY 2024-2025 PERSONNEL DATA - TEACHING PERSONNEL BY POSITION TITLE BY SCHOOL
+- **Agency:** Department of Education (DepEd)
+- **Format:** XLSX
+- **Planned Ingestion Method:** Manual File Download (official dataset provided by DepEd through FOI request)
+- **Coverage:** Latest available personnel records (Last updated: June 5, 2025)
+- **Why it fits the problem:** Provides teaching personnel counts that can be linked to the enrollment dataset through School ID to compute student-to-teacher ratios at the provincial level.
+- **Known limitations:** Personnel data is updated independently of enrollment data, resulting in a difference in reporting periods between the two datasets.
+
+---
+
+### Primary Source 6
 - **Status:** 🟡 Pending FOI Request
 - **Name:** Directory of Higher Education Institutions (HEIs)
 - **Agency:** Commission on Higher Education (CHED)
@@ -214,12 +208,12 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 
 ## Domain 3 — Healthcare Access
 
-### Primary Source 6
+### Primary Source 7
 - **Status:** ✅ Confirmed
 - **Name:** National Health Facility Registry (NHFR) – Provincial Facility Details
 - **Agency:** Department of Health (DOH)
 - **URL:** https://nhfr.doh.gov.ph/StatHfProvincialList
-- **Format:** CSV / XLSX
+- **Format:** XLS
 - **Planned Ingestion Method:** Manual File Download
 - **Coverage:** Licensed hospitals, rural health units, clinics, and other health facilities nationwide
 - **Why it fits the problem:** Supports calculation of healthcare facility density and accessibility.
@@ -229,7 +223,7 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 
 ## Domain 4 — Infrastructure & Accessibility
 
-### Primary Source 7
+### Primary Source 8
 - **Status:** 🔵 To Be Sourced
 - **Name:** OpenStreetMap Road Network
 - **Agency:** OpenStreetMap
@@ -239,18 +233,14 @@ The Provincial Opportunity Index (POI) is constructed by integrating multiple au
 - **Why it fits the problem:** Enables derivation of road density and transportation accessibility indicators.
 - **Known limitations:** Community-maintained dataset with varying completeness across locations.
 
----
+### Planned Source
 
 ## Domain 5 — Digital Connectivity (Optional)
 
-**Status:** ⚪ Planned for Future Enhancement
-
-Digital connectivity indicators are currently under evaluation. Reliable province-level public datasets are being assessed for inclusion in a future iteration of the Provincial Opportunity Index.
-
-Potential sources include:
-- Department of Information and Communications Technology (DICT)
-- National Telecommunications Commission (NTC)
-- PSA ICT-related indicators (where available)
+- **Status:** ⚪ Optional
+- **Potential Agencies:** DICT, NTC, PSA
+- **Planned Ingestion Method:** To Be Determined
+- **Reason:** Candidate indicators for future enhancement of the Provincial Opportunity Index.
 
 # Supporting Data Sources
 
@@ -270,29 +260,36 @@ These datasets support multiple domains of the Provincial Opportunity Index by p
 
 ---
 
-## Supporting Source 2
+### Supporting Source 2
 
-- **Status:** 🔵 To Be Sourced
-- **Name:** Philippine Administrative Boundary Shapefiles
-- **Agency:** PSA / NAMRIA
-- **Format:** SHP / GeoJSON
+- **Status:** 🟢 Available
+- **Name:** Philippines Administrative Boundaries (COD-AB)
+- **Agency:** Humanitarian Data Exchange (HDX)
+- **Provider:** United Nations Office for the Coordination of Humanitarian Affairs (OCHA)
+- **URL:** https://data.humdata.org/dataset/cod-ab-phl
+- **Format:** Shapefile (SHP)
 - **Planned Ingestion Method:** Manual File Download
-- **Coverage:** Provincial administrative boundaries
-- **Why it fits the problem:** Enables province-level aggregation, spatial joins, and choropleth visualizations.
-- **Known limitations:** Administrative boundary revisions should be documented.
-
-### Fallback Source
-
-- **Name:** GADM Administrative Areas
-- **URL:** https://gadm.org
-- **Format:** SHP / GeoPackage
-- **Planned Ingestion Method:** Manual File Download
-- **Coverage:** Global administrative boundaries
-- **Why it could still work:** Widely used alternative for GIS analyses when official boundary files are unavailable.
-- **Known limitations:** May lag behind official Philippine administrative updates.
+- **Coverage:** National administrative boundaries (Regions, Provinces, Municipalities, and Barangays)
+- **Data Currency:** Last reviewed: April 1, 2024
+- **Why it fits the problem:** Provides standardized administrative boundary polygons required for province-level spatial joins, aggregation of indicators, computation of area-based metrics (e.g., road density), and choropleth map visualizations.
+- **Known limitations:** Administrative boundaries may be revised over time. The project will document the dataset version used to ensure reproducibility.
 
 ---
 
+## 📌 Data Source Provenance
+For exact raw file paths, source URLs, download timestamps, and manual acquisition rationale for all datasets, see the [`data/DATA_LOG.md`](./data/DATA_LOG.md).
+
+---
+
+## 🚀 How to Run the Data Ingestion Pipeline
+
+### 1. Prerequisites & Environment Setup
+Ensure your environment is active and spatial dependencies are installed:
+
+```bash
+pip install -r requirements.txt
+
+---
 
 ## Possible Final Dashboard
 
