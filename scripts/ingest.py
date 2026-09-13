@@ -24,8 +24,8 @@ RETAIN_ALL = True
 
 # NETWORK & RESILIENCE SETTINGS
 MAX_RETRIES = 3
-RETRY_DELAY = 10
-ox.settings.requests_timeout = 300  # Increased to 5 mins for large combined domains (e.g., provincial remainder polygons)
+RETRY_DELAY = 120
+ox.settings.requests_timeout = 4800  # Increased to 1hr20mins for large combined domains (e.g., provincial remainder polygons)
 ox.settings.user_agent = (
     "PhilippineInfrastructureResearch/1.0 (jimwellbryllsantos@gmail.com)"
 )
@@ -43,7 +43,7 @@ ox.settings.cache_folder = RAW_API_CACHE_DIR
 def run_osm_ingestion():
     print(f"--- 1. Loading Domain Boundaries: {NAMRIA_SHP_PATH} ---")
     if not Path(NAMRIA_SHP_PATH).exists():
-        print(f"❌ Error: File not found at '{NAMRIA_SHP_PATH}'.")
+        print(f"Error: File not found at '{NAMRIA_SHP_PATH}'.")
         return
 
     gdf_domains = gpd.read_file(NAMRIA_SHP_PATH)
@@ -51,7 +51,7 @@ def run_osm_ingestion():
 
     if LGU_NAME_COLUMN not in gdf_domains.columns:
         print(
-            f"❌ Error: Column '{LGU_NAME_COLUMN}' missing. Available columns: {list(gdf_domains.columns)}"
+            f"Error: Column '{LGU_NAME_COLUMN}' missing. Available columns: {list(gdf_domains.columns)}"
         )
         return
 
@@ -84,7 +84,7 @@ def run_osm_ingestion():
         # RESUME CHECK: Skip if already extracted
         if file_path.exists():
             print(
-                f"[{idx+1}/{len(gdf_domains)}] ⏩ Skipping {domain_name}: Output already exists."
+                f"[{idx+1}/{len(gdf_domains)}] Skipping {domain_name}: Output already exists."
             )
             successful_count += 1
             continue
@@ -111,7 +111,7 @@ def run_osm_ingestion():
                 break
 
             except Exception as e:
-                print(f"   ⚠️ Attempt {attempt} failed for '{domain_name}': {e}")
+                print(f"   Attempt {attempt} failed for '{domain_name}': {e}")
                 if attempt < MAX_RETRIES:
                     print(
                         f"   ⏳ Waiting {RETRY_DELAY} seconds before retrying..."
@@ -120,7 +120,7 @@ def run_osm_ingestion():
 
         if not success:
             print(
-                f"❌ Failed to extract '{domain_name}' after {MAX_RETRIES} attempts. Moving to next domain.\n"
+                f"Failed to extract '{domain_name}' after {MAX_RETRIES} attempts. Moving to next domain.\n"
             )
             skipped_count += 1
 
