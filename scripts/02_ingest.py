@@ -69,7 +69,7 @@ def run_osm_ingestion():
         domain_name = str(row[LGU_NAME_COLUMN])
         polygon = row["geometry"]
 
-        # Sanitize filename for 113 domains (handles parenthetical domain names safely)
+        # Sanitize filename for 119 domains (handles parenthetical domain names safely)
         safe_filename = (
             domain_name.lower()
             .replace(" ", "_")

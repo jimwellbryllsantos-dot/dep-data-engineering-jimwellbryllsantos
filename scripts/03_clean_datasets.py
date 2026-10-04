@@ -468,14 +468,14 @@ def clean_teaching_personnel_dataset(domain_map: dict) -> Path:
             cols = df_sheet.columns.tolist()
             
             # Dynamically slice all columns from 'Enrollment' up to 'Total {sheet}'
-            if 'Enrollment' in cols:
-                start_idx = cols.index('Enrollment')
+            if 'Master Teacher IV' in cols:
+                start_idx = cols.index('Master Teacher IV')
                 total_col = f"Total {sheet}"
                 end_idx = cols.index(total_col) if total_col in cols else len(cols)
                 target_cols = cols[start_idx:end_idx]
             else:
                 # Fallback if structure changes slightly
-                target_cols = [c for c in cols if any(x in str(c) for x in ['Teacher', 'Instructor', 'SPED', 'Enrollment'])]
+                target_cols = [c for c in cols if any(x in str(c) for x in ['Teacher', 'Instructor', 'SPED'])]
             
             loc_cols = ["Division", "Province", "Municipality"]
             keep_cols = loc_cols + target_cols
